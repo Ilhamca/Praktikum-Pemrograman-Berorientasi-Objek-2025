@@ -16,6 +16,10 @@ public class BookingPage extends JFrame implements ActionListener {
 
     //instansiasi GUI COMPONENT
     //Roomname
+    JLabel room = new JLabel("");
+    JLabel price = new JLabel("");
+    JLabel roomInformation = new JLabel("");
+
     //Text Nama
     JLabel tulisan = new JLabel("Booking Page");
     JLabel nameLabel = new JLabel("Name : ");
@@ -45,10 +49,7 @@ public class BookingPage extends JFrame implements ActionListener {
     JButton loginButton = new JButton("Book");
     JButton resetButton = new JButton("Reset");
 
-    public BookingPage(String roomName) {
-        //Simple Cross Reference idk how
-        JLabel roomTitle = new JLabel(roomName);
-
+    public BookingPage(int roomName) {
         //setting frame
         setVisible(true);
         setSize(720, 480);
@@ -59,9 +60,27 @@ public class BookingPage extends JFrame implements ActionListener {
         setLayout(null);
 
         //add GUI COMPONENT to frame
-        add(roomTitle);
-        roomTitle.setBounds(160, 5, 300, 24);
+        //Roomtitle info
+        add(room);
+        add(price);
+        add(roomInformation);
+        switch (roomName) {
+            case 1:
+                room.setText("Small Room");
+                price.setText("200000");
+                roomInformation.setText("Small Room for Rp 200.000");
+                break;
+            case 2:
+                room.setText("Big Room");
+                price.setText("350000");
+                roomInformation.setText("Small Room for Rp 350.000");
+                break;
+            default:
 
+        }
+        roomInformation.setBounds(160, 5, 300, 24);
+
+        //Login Username
         add(tulisan);
         add(nameLabel);
         add(usernameTextField);
@@ -139,7 +158,21 @@ public class BookingPage extends JFrame implements ActionListener {
                 }
 
                 // Code to proceed with booking if inputs are valid
-                new SubmitSuccess();
+                String roomTitle = room.getText();
+                String username = usernameTextField.getText().trim();
+
+                String gender = null;
+                if (pilihMale.isSelected()) {
+                    gender = "Male";
+                } else if (pilihFemale.isSelected()) {
+                    gender = "Female";
+                }
+
+                int people = pilihanGuest.getSelectedIndex();
+                int duration = Integer.parseInt(durationTextField.getText().trim());
+                int priceRoom = Integer.parseInt(price.getText().trim());
+                //sendit
+                new SubmitSuccess(roomTitle, username, gender, people, priceRoom, duration);
                 this.dispose();
             } else if (e.getSource() == resetButton) {
                 //kode yang dijalankan jika tombol reset di click
@@ -154,5 +187,4 @@ public class BookingPage extends JFrame implements ActionListener {
             error.printStackTrace();
         }
     }
-
 }

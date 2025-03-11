@@ -15,16 +15,21 @@ import javax.swing.*;
 public class HomePage extends JFrame implements ActionListener{
     
     //GUI and Initialization
-    JLabel labelHomepage = new JLabel("WELCOME TO HOMEPAGE");
-    JButton smallRoom = new JButton("Small Room");
-    JButton largeRoom = new JButton("Large Room");
+
+    JButton smallRoom = new JButton("Order Small Room");
+    JButton largeRoom = new JButton("Order Large Room");
     
     //Harga Label
-    JLabel hargaSmall = new JLabel("Rp. 200.000");
-    JLabel hargaLarge = new JLabel("Rp. 350.000");
+    JLabel hargaSmall = new JLabel("Rp. 200.000 Per Orang");
+    JLabel hargaLarge = new JLabel("Rp. 350.000 Per Orang");
     
     
-    HomePage(){
+    HomePage(String username){
+        //Gui for cross reference
+        JLabel labelHomepage = new JLabel("WELCOME " + username + " TO HOMEPAGE");
+                
+        
+        
         setVisible(true);
         setSize(720, 480);
         setTitle("Home Page");
@@ -40,13 +45,13 @@ public class HomePage extends JFrame implements ActionListener{
         add(smallRoom);
         smallRoom.setBounds(50, 220, 200, 32);
         add(hargaSmall);
-        hargaSmall.setBounds(120,260,100,20);
+        hargaSmall.setBounds(90,260,150,20);
         
         //LargeRoom & price
         add(largeRoom);
         largeRoom.setBounds(300, 220, 200, 32);
         add(hargaLarge);
-        hargaLarge.setBounds(370,260,100,20);
+        hargaLarge.setBounds(340,260,150,20);
         
         smallRoom.addActionListener(this);
         largeRoom.addActionListener(this);
@@ -58,14 +63,14 @@ public class HomePage extends JFrame implements ActionListener{
             if (e.getSource() == smallRoom) {
                 //code yang dijalankan jika click tombol button
                 String roomName = "Ordered Small Room for Rp. 200.000";
-                new BookingPage(roomName);
+                new BookingPage(1);
                 this.dispose();
 
             } else if (e.getSource() == largeRoom){
                 //code yang dijalankan jika click tombol button
                 String roomName = "Ordered Large Room for Rp. 350.000";
 
-                new BookingPage(roomName);
+                new BookingPage(2);
                 this.dispose();
             }
 

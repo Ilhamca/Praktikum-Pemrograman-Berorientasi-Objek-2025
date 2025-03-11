@@ -66,7 +66,7 @@ public class LoginPage extends JFrame implements ActionListener {
 
                 if (username.equals("adm") && password.equals("adm")) {
                     System.out.println("Login Success");
-                    new HomePage();
+                    new HomePage(username);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Wrong Username or Pass");
